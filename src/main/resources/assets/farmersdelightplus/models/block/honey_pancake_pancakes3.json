@@ -1,0 +1,8 @@
+{
+    "parent": "farmersdelightplus:block/template_pancake_pancakes3",
+    "textures": {
+        "particle": "farmersdelightplus:block/honey_pancake_top",
+        "top": "farmersdelightplus:block/honey_pancake_top",
+        "side": "farmersdelightplus:block/honey_pancake_side"
+    }
+}

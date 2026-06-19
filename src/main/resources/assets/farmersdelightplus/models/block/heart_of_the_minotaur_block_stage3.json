@@ -1,0 +1,70 @@
+{
+    "parent": "block/block",
+    "textures": {
+        "beef": "farmersdelightplus:block/cooked_beef",
+        "rib_cage": "farmersdelightplus:block/minotaur_rib_cage",
+        "particle": "farmersdelightplus:block/tray_rice_with_tomato_sauce",
+        "tray_top": "farmersdelightplus:block/tray_rice_with_tomato_sauce",
+        "tray_side": "farmersdelight:block/tray_bottom"
+    },
+    "elements": [
+        {
+            "from": [2.29082, 5.65631, 7.5],
+            "to": [3.29082, 8.65631, 9.5],
+            "rotation": {"angle": -22.5, "axis": "z", "origin": [2.78149, 5.59713, 8.5]},
+            "faces": {
+                "north": {"uv": [13, 13, 14, 16], "texture": "#rib_cage"},
+                "east": {"uv": [13, 13, 11, 16], "texture": "#rib_cage"},
+                "south": {"uv": [13, 13, 14, 16], "texture": "#rib_cage"},
+                "west": {"uv": [13, 13, 11, 16], "texture": "#rib_cage"},
+                "up": {"uv": [11, 12, 13, 13], "rotation": 90, "texture": "#rib_cage"}
+            }
+        },
+        {
+            "from": [2, 2, 7],
+            "to": [4, 6, 10],
+            "faces": {
+                "north": {"uv": [7, 12, 5, 16], "texture": "#rib_cage"},
+                "east": {"uv": [10, 12, 7, 16], "texture": "#rib_cage"},
+                "south": {"uv": [2, 12, 0, 16], "texture": "#rib_cage"},
+                "west": {"uv": [5, 12, 2, 16], "texture": "#rib_cage"},
+                "up": {"uv": [2, 12, 5, 10], "rotation": 90, "texture": "#rib_cage"}
+            }
+        },
+        {
+            "from": [7, 2, 6],
+            "to": [9, 4, 10],
+            "faces": {
+                "north": {"uv": [4, 6, 6, 8], "texture": "#rib_cage"},
+                "east": {"uv": [0, 6, 4, 8], "texture": "#rib_cage"},
+                "south": {"uv": [14, 6, 16, 8], "texture": "#rib_cage"},
+                "west": {"uv": [8, 10, 12, 12], "texture": "#rib_cage"},
+                "up": {"uv": [8, 8, 10, 12], "rotation": 180, "texture": "#rib_cage"}
+            }
+        },
+        {
+            "from": [6, 1, 9.75],
+            "to": [10, 3, 13.45],
+            "rotation": {"angle": 22.5, "axis": "x", "origin": [7.5, 1, 12]},
+            "faces": {
+                "north": {"uv": [0, 4, 4, 6], "texture": "#beef"},
+                "east": {"uv": [0, 11, 4, 13], "texture": "#beef"},
+                "south": {"uv": [7, 3, 10, 6], "texture": "#beef"},
+                "west": {"uv": [11, 8, 15, 10], "texture": "#beef"},
+                "up": {"uv": [6, 11, 2, 7], "texture": "#beef"}
+            }
+        },
+        {
+            "from": [1, 0, 1],
+            "to": [15, 2, 15],
+            "faces": {
+                "north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+                "down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
+            }
+        }
+    ]
+}

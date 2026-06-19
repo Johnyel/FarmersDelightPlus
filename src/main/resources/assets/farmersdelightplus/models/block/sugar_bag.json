@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "farmersdelightplus:block/sugar_bag_top",
+    "down": "farmersdelight:block/rice_bag_bottom",
+    "east": "farmersdelightplus:block/sugar_bag_side",
+    "north": "farmersdelightplus:block/sugar_bag_side_tied",
+    "south": "farmersdelightplus:block/sugar_bag_side_tied",
+    "up": "farmersdelightplus:block/sugar_bag_top",
+    "west": "farmersdelightplus:block/sugar_bag_side"
+  }
+}

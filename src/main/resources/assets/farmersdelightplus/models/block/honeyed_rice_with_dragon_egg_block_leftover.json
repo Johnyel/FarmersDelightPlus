@@ -1,0 +1,36 @@
+{
+    "parent": "block/block",
+    "textures": {
+        "salmon": "farmersdelightplus:entity/fish/salmon_honey_cooked",
+        "particle": "farmersdelightplus:block/tray_rice_honey_leftover",
+        "tray_top": "farmersdelightplus:block/tray_rice_honey_leftover",
+        "tray_side": "farmersdelight:block/tray_bottom"
+    },
+    "elements": [
+        {
+            "from": [1.93888, 2, 11.27584],
+            "to": [5.93888, 5, 13.27584],
+            "rotation": {"angle": -22.5, "axis": "y", "origin": [4.83888, 4, 10.27584]},
+            "faces": {
+                "north": {"uv": [11, 1.5, 12.5, 3.5], "rotation": 270, "texture": "#salmon"},
+                "east": {"uv": [13.5, 1.5, 12.5, 0], "texture": "#salmon"},
+                "south": {"uv": [13.5, 1.5, 15, 3.5], "rotation": 90, "texture": "#salmon"},
+                "west": {"uv": [16, 1.5, 15, 3.5], "rotation": 180, "texture": "#salmon"},
+                "up": {"uv": [12.5, 1.5, 13.5, 3.5], "rotation": 90, "texture": "#salmon"},
+                "down": {"uv": [15, 1.5, 16, 3.5], "rotation": 90, "texture": "#salmon"}
+            }
+        },
+        {
+            "from": [1, 0, 1],
+            "to": [15, 2, 15],
+            "faces": {
+                "north": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "east": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "south": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "west": {"uv": [1, 11, 15, 13], "texture": "#tray_side"},
+                "up": {"uv": [1, 1, 15, 15], "texture": "#tray_top"},
+                "down": {"uv": [1, 1, 15, 15], "texture": "#tray_side", "cullface": "down"}
+            }
+        }
+    ]
+}

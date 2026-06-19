@@ -1,0 +1,8 @@
+{
+    "parent": "farmersdelightplus:block/template_pancake_pancakes11",
+    "textures": {
+        "particle": "farmersdelightplus:block/berry_pancake_top",
+        "top": "farmersdelightplus:block/berry_pancake_top",
+        "side": "farmersdelightplus:block/berry_pancake_side"
+    }
+}
