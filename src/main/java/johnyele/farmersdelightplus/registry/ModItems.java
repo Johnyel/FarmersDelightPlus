@@ -1,15 +1,15 @@
 package johnyele.farmersdelightplus.registry;
 
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Rarity;
 
 import johnyele.farmersdelightplus.FarmersdelightplusMod;
 import johnyele.farmersdelightplus.item.ConsumableItem;
@@ -25,30 +25,31 @@ public class ModItems {
 	public static Item.Properties basicItem() {
 		return new Item.Properties().tab(FarmersdelightplusMod.CREATIVE_TAB);
 	}
-	
-	public static Item.Properties foodItem(Food food) {
+
+	public static Item.Properties foodItem(FoodProperties food) {
 		return basicItem().food(food);
 	}
 
-	public static Item.Properties containerFoodItem(Food food, Item remainder) {
+	public static Item.Properties containerFoodItem(FoodProperties food, Item remainder) {
 		return foodItem(food).stacksTo(16).craftRemainder(remainder);
 	}
 
-	public static Item.Properties bowlFoodItem(Food food) {
+	public static Item.Properties bowlFoodItem(FoodProperties food) {
 		return containerFoodItem(food, Items.BOWL);
 	}
 
-	public static Item.Properties drinkItem(Food food) {
+	public static Item.Properties drinkItem(FoodProperties food) {
 		return containerFoodItem(food, Items.GLASS_BOTTLE);
 	}
 
-	public static Item.Properties hiddenDrinkItem(Food food) {
+	public static Item.Properties hiddenDrinkItem(FoodProperties food) {
 		return new Item.Properties().food(food).stacksTo(16).craftRemainder(Items.GLASS_BOTTLE);
 	}
 
 	// Blocks
 	public static final RegistryObject<Item> GOLDEN_CARROT_CRATE = REGISTRY.register("golden_carrot_crate", () -> new BlockItem(ModBlocks.GOLDEN_CARROT_CRATE.get(), basicItem()));
 	public static final RegistryObject<Item> SWEET_BERRY_BARREL = REGISTRY.register("sweet_berry_barrel", () -> new BlockItem(ModBlocks.SWEET_BERRY_BARREL.get(), basicItem()));
+	public static final RegistryObject<Item> GLOW_BERRY_BARREL = REGISTRY.register("glow_berry_barrel", () -> new BlockItem(ModBlocks.GLOW_BERRY_BARREL.get(), basicItem()));
 	public static final RegistryObject<Item> SUGAR_BAG = REGISTRY.register("sugar_bag", () -> new BlockItem(ModBlocks.SUGAR_BAG.get(), basicItem()));
 
 	// Drinks
@@ -69,10 +70,10 @@ public class ModItems {
 
 	// Sweets
 	public static final RegistryObject<Item> RICE_FLATBREAD = REGISTRY.register("rice_flatbread", () -> new ConsumableItem(foodItem(FoodValues.RICE_FLATBREAD)));
-	public static final RegistryObject<Item> EMPTY_PANCAKE = REGISTRY.register("empty_pancake", () -> new BlockNamedItem(ModBlocks.EMPTY_PANCAKE.get(), foodItem(FoodValues.EMPTY_PANCAKE)));
-	public static final RegistryObject<Item> BERRY_PANCAKE = REGISTRY.register("berry_pancake", () -> new BlockNamedItem(ModBlocks.BERRY_PANCAKE.get(), foodItem(FoodValues.BERRY_PANCAKE)));
-	public static final RegistryObject<Item> HONEY_PANCAKE = REGISTRY.register("honey_pancake", () -> new BlockNamedItem(ModBlocks.HONEY_PANCAKE.get(), foodItem(FoodValues.HONEY_PANCAKE)));
-	public static final RegistryObject<Item> CHOCOLATE_PANCAKE = REGISTRY.register("chocolate_pancake", () -> new BlockNamedItem(ModBlocks.CHOCOLATE_PANCAKE.get(), foodItem(FoodValues.CHOCOLATE_PANCAKE)));
+	public static final RegistryObject<Item> EMPTY_PANCAKE = REGISTRY.register("empty_pancake", () -> new ItemNameBlockItem(ModBlocks.EMPTY_PANCAKE.get(), foodItem(FoodValues.EMPTY_PANCAKE)));
+	public static final RegistryObject<Item> BERRY_PANCAKE = REGISTRY.register("berry_pancake", () -> new ItemNameBlockItem(ModBlocks.BERRY_PANCAKE.get(), foodItem(FoodValues.BERRY_PANCAKE)));
+	public static final RegistryObject<Item> HONEY_PANCAKE = REGISTRY.register("honey_pancake", () -> new ItemNameBlockItem(ModBlocks.HONEY_PANCAKE.get(), foodItem(FoodValues.HONEY_PANCAKE)));
+	public static final RegistryObject<Item> CHOCOLATE_PANCAKE = REGISTRY.register("chocolate_pancake", () -> new ItemNameBlockItem(ModBlocks.CHOCOLATE_PANCAKE.get(), foodItem(FoodValues.CHOCOLATE_PANCAKE)));
 	public static final RegistryObject<Item> CANDIED_SLIME = REGISTRY.register("candied_slime", () -> new ConsumableItem(foodItem(FoodValues.CANDIED_SLIME), false, true));
 
 	// Meals
@@ -87,7 +88,7 @@ public class ModItems {
 	public static final RegistryObject<Item> LAGMAN = REGISTRY.register("lagman", () -> new DrinkableItem(bowlFoodItem(FoodValues.LAGMAN), true));
 	public static final RegistryObject<Item> RISOTTO = REGISTRY.register("risotto", () -> new ConsumableItem(bowlFoodItem(FoodValues.RISOTTO), true));
 	public static final RegistryObject<Item> GLOW_INK_PASTA = REGISTRY.register("glow_ink_pasta", () -> new ConsumableItem(bowlFoodItem(FoodValues.GLOW_INK_PASTA), true));
-	public static final RegistryObject<Item> RICE_WITH_FROGSPAWN = REGISTRY.register("rice_with_black_caviar", () -> new ConsumableItem(bowlFoodItem(FoodValues.RICE_WITH_BLACK_CAVIAR), true, true));
+	public static final RegistryObject<Item> RICE_WITH_FROGSPAWN = REGISTRY.register("rice_with_frogspawn", () -> new ConsumableItem(bowlFoodItem(FoodValues.RICE_WITH_FROGSPAWN), true, true));
 	public static final RegistryObject<Item> ASSORTED_PUFFERFISH_IN_TOMATO_SAUCE = REGISTRY.register("assorted_pufferfish_in_tomato_sauce", () -> new ConsumableItem(bowlFoodItem(FoodValues.ASSORTED_PUFFERFISH_IN_TOMATO_SAUCE), true));
 	public static final RegistryObject<Item> FESTIVE_PORKCHOP_WITH_BERRIES = REGISTRY.register("festive_porkchop_with_berries", () -> new ConsumableItem(bowlFoodItem(FoodValues.FESTIVE_PORKCHOP_WITH_BERRIES), true));
 	public static final RegistryObject<Item> CHOCOLATE_GLAZED_CHICKEN = REGISTRY.register("chocolate_glazed_chicken", () -> new ConsumableItem(bowlFoodItem(FoodValues.CHOCOLATE_GLAZED_CHICKEN), true));

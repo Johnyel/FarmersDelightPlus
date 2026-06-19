@@ -1,31 +1,32 @@
 package johnyele.farmersdelightplus.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Supplier;
 
@@ -37,7 +38,7 @@ public class FeastBlock extends Block {
 	public final Supplier<Item> servingItem;
 	public final boolean hasLeftovers;
 	
-	public FeastBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
+	public FeastBlock(BlockBehaviour.Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
 		super(properties);
 		this.servingItem = servingItem;
 		this.hasLeftovers = hasLeftovers;
@@ -52,85 +53,85 @@ public class FeastBlock extends Block {
 		return 4;
 	}
 
-	public ItemStack getServingItem() {
+	public ItemStack getServingItem(BlockState state) {
 		return new ItemStack(this.servingItem.get());
 	}
 
-	public ItemStack getContainerItem() {
-		return this.getServingItem().getContainerItem();
+	public ItemStack getContainerItem(BlockState state) {
+		return this.getServingItem(state).getCraftingRemainingItem();
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return PLATE_SHAPE;
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if (world.isClientSide()) {
-			if (this.takeServing(world, pos, state, player, hand).consumesAction()) {
-				return ActionResultType.SUCCESS;
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (level.isClientSide) {
+			if (this.takeServing(level, pos, state, player, hand).consumesAction()) {
+				return InteractionResult.SUCCESS;
 			}
 		}
-		return this.takeServing(world, pos, state, player, hand);
+		return this.takeServing(level, pos, state, player, hand);
 	}
 
-	protected ActionResultType takeServing(IWorld world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand) {
+	protected InteractionResult takeServing(LevelAccessor level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
 		int servings = state.getValue(getServingsProperty());
 
 		if (servings == 0) {
-			world.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundCategory.PLAYERS, 0.8F, 0.8F);
-			world.destroyBlock(pos, true);
-			return ActionResultType.SUCCESS;
+			level.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
+			level.destroyBlock(pos, true);
+			return InteractionResult.SUCCESS;
 		}
 
-		ItemStack serving = this.getServingItem();
-		ItemStack container = this.getContainerItem();
+		ItemStack serving = this.getServingItem(state);
+		ItemStack container = this.getContainerItem(state);
 		ItemStack heldStack = player.getItemInHand(hand);
 
 		if (servings > 0) {
-			if (!serving.hasContainerItem() || heldStack.sameItem(container)) {
-				world.setBlock(pos, state.setValue(getServingsProperty(), servings - 1), 3);
-				if (!player.abilities.instabuild && serving.hasContainerItem()) {
+			if (!serving.hasCraftingRemainingItem() || heldStack.sameItem(container)) {
+				level.setBlock(pos, state.setValue(getServingsProperty(), servings - 1), 3);
+				if (!player.getAbilities().instabuild && serving.hasCraftingRemainingItem()) {
 					heldStack.shrink(1);
 				}
-				if (!player.inventory.add(serving)) {
+				if (!player.getInventory().add(serving)) {
 					player.drop(serving, false);
 				}
-				if (world.getBlockState(pos).getValue(getServingsProperty()) == 0 && !this.hasLeftovers) {
-					world.removeBlock(pos, false);
+				if (level.getBlockState(pos).getValue(getServingsProperty()) == 0 && !this.hasLeftovers) {
+					level.removeBlock(pos, false);
 				}
-				world.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				return ActionResultType.SUCCESS;
+				level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+				return InteractionResult.SUCCESS;
 			} else {
-				player.displayClientMessage(new TranslationTextComponent("farmersdelight.block.feast.use_container", container.getHoverName()), true);
+				player.displayClientMessage(Component.translatable("farmersdelight.block.feast.use_container", container.getHoverName()), true);
 			}
 		}
-		return ActionResultType.PASS;
+		return InteractionResult.PASS;
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN && !state.canSurvive(world, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, world, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		return facing == Direction.DOWN && !stateIn.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
-		return world.getBlockState(pos.below()).getMaterial().isSolid();
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return level.getBlockState(pos.below()).getMaterial().isSolid();
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, SERVINGS);
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, World world, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
 		return blockState.getValue(getServingsProperty());
 	}
 
@@ -140,7 +141,7 @@ public class FeastBlock extends Block {
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
 		return false;
 	}
 }

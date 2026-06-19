@@ -1,15 +1,16 @@
 package johnyele.farmersdelightplus.integration.jei;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.IIngredientType;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 
 import johnyele.farmersdelightplus.FarmersdelightplusMod;
@@ -20,28 +21,24 @@ import johnyele.farmersdelightplus.registry.ModItems;
 public class PancakeRecipeCategory implements IRecipeCategory<PancakeRecipe> {
 	public static final ResourceLocation UID = FarmersdelightplusMod.asResource("pancake_filling");
 	public static final ResourceLocation TEXTURE = FarmersdelightplusMod.asResource("textures/gui/jei/pancake_filling.png");
-
+	
 	private final IDrawable background;
 	private final IDrawable icon;
 
 	public PancakeRecipeCategory(IGuiHelper helper) {
+		ResourceLocation backgroundImage = FarmersdelightplusMod.asResource("textures/gui/jei/pancake_filling.png");
 		this.background = helper.createDrawable(TEXTURE, 0, 0, 94, 58);
-		this.icon = helper.createDrawableIngredient(new ItemStack(ModItems.EMPTY_PANCAKE.get()));
+		this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItems.EMPTY_PANCAKE.get()));
 	}
 
 	@Override
-	public ResourceLocation getUid() {
-		return UID;
+	public RecipeType<PancakeRecipe> getRecipeType() {
+		return JEIPlugin.PANCAKE_FILLING;
 	}
 
 	@Override
-	public Class<? extends PancakeRecipe> getRecipeClass() {
-		return PancakeRecipe.class;
-	}
-
-	@Override
-	public String getTitle() {
-		return new TranslationTextComponent(FarmersdelightplusMod.MODID + ".jei.pancake_filling").getString();
+	public Component getTitle() {
+		return Component.translatable(FarmersdelightplusMod.MODID + ".jei.pancake_filling");
 	}
 
 	@Override
@@ -55,17 +52,8 @@ public class PancakeRecipeCategory implements IRecipeCategory<PancakeRecipe> {
 	}
 
 	@Override
-	public void setIngredients(PancakeRecipe recipe, IIngredients ingredients) {
-		ingredients.setInputIngredients(recipe.getIngredients());
-		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
-	}
-
-	@Override
-	public void setRecipe(IRecipeLayout layout, PancakeRecipe recipe, IIngredients ingredients) {
-		layout.getItemStacks().init(0, true, 14 - 1, 3 - 1);
-		layout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-
-		layout.getItemStacks().init(1, false, 75 - 1, 21 - 1);
-		layout.getItemStacks().set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+	public void setRecipe(IRecipeLayoutBuilder builder, PancakeRecipe recipe, IFocusGroup focuses) {
+		builder.addSlot(RecipeIngredientRole.INPUT, 14, 3).addIngredients(recipe.getIngredients().get(0));
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 75, 21).addItemStack(recipe.getResultItem());
 	}
 }

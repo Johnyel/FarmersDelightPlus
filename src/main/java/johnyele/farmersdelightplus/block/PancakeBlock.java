@@ -1,30 +1,30 @@
 package johnyele.farmersdelightplus.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import johnyele.farmersdelightplus.config.ModCommonConfig;
 import johnyele.farmersdelightplus.item.crafting.PancakeRecipe;
@@ -54,7 +54,7 @@ public class PancakeBlock extends Block {
 		Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D)
 	};
 	
-	public PancakeBlock(Properties properties) {
+	public PancakeBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(PANCAKES, 1));
 	}
@@ -64,17 +64,17 @@ public class PancakeBlock extends Block {
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		int i = state.getValue(PANCAKES) - 1;
 		return SHAPES[i];
 	}
 
 	@Nullable
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		World world = context.getLevel();
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Level level = context.getLevel();
 		BlockPos pos = context.getClickedPos();
-		BlockState blockstate = world.getBlockState(pos);
+		BlockState blockstate = level.getBlockState(pos);
 		if (blockstate.getBlock() == this) {
 			return blockstate.setValue(PANCAKES, Math.min(16, blockstate.getValue(PANCAKES) + 1));
 		}
@@ -85,101 +85,101 @@ public class PancakeBlock extends Block {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack itemstack = player.getItemInHand(hand);
-		if (world.getBlockState(pos.above()).getBlock() != this) {
+		if (level.getBlockState(pos.above()).getBlock() != this) {
 			
-			if (this.asBlock() == ModBlocks.EMPTY_PANCAKE.get() && PancakeRecipe.tryCraft(world, itemstack, pos, state, player)) {
-				return ActionResultType.SUCCESS;
+			if (this.asBlock() == ModBlocks.EMPTY_PANCAKE.get() && PancakeRecipe.tryCraft(level, itemstack, pos, state, player)) {
+				return InteractionResult.SUCCESS;
 			}
 
 			if (ModCommonConfig.ENABLE_PANCAKE_BOWL_PICKING_UP.get()) {
-				if (itemstack.getItem() == Items.BOWL || itemstack.getItem().is(ModItemTags.BOWLS)) {
+				if (itemstack.is(Items.BOWL) || itemstack.is(ModItemTags.BOWLS)) {
 					int i = state.getValue(PANCAKES);
 					int i1 = Math.max(0, i - 4);
-					if (!player.abilities.instabuild) {
+					if (!player.getAbilities().instabuild) {
 						ItemStack pancake = this.getPancakeItem(i - i1);
-						if (!player.inventory.add(pancake)) {
+						if (!player.getInventory().add(pancake)) {
 							player.drop(pancake, false);
 						}
 		            }
-					world.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundCategory.BLOCKS, 1.0F, 1.0F);
-					player.awardStat(Stats.ITEM_USED.get(itemstack.getItem()));
-					setPancakes(world, pos, state, i1);
-					return ActionResultType.SUCCESS;
+		            level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+		            player.awardStat(Stats.ITEM_USED.get(itemstack.getItem()));
+		            setPancakes(level, pos, state, i1);
+					return InteractionResult.SUCCESS;
 				}
 			}
 			
 			if (player.isShiftKeyDown()) {
-				if (!world.isClientSide()) {
-					InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), this.getPancakeItem(1));
-					setPancakes(world, pos, state, state.getValue(PANCAKES) - 1);
+				if (!level.isClientSide) {
+					popResource(level, pos, this.getPancakeItem(1));
+					setPancakes(level, pos, state, state.getValue(PANCAKES) - 1);
 				}
-				return ActionResultType.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 			
 			if (itemstack.getItem() != this.asItem()) {
-				if (world.isClientSide()) {
-					if (this.tryEat(world, pos, state, player, itemstack).consumesAction()) {
-						return ActionResultType.SUCCESS;
+				if (level.isClientSide) {
+					if (this.tryEat(level, pos, state, player, itemstack).consumesAction()) {
+						return InteractionResult.SUCCESS;
 					}
 	
 					if (itemstack.isEmpty()) {
-						return ActionResultType.CONSUME;
+						return InteractionResult.CONSUME;
 					}
 				}
-				return this.tryEat(world, pos, state, player, itemstack);
+				return this.tryEat(level, pos, state, player, itemstack);
 			}
 		}
-		return ActionResultType.PASS;
+		return InteractionResult.PASS;
 	}
 
-	private ActionResultType tryEat(World world, BlockPos pos, BlockState state, PlayerEntity player, ItemStack itemstack) {
+	private InteractionResult tryEat(Level level, BlockPos pos, BlockState state, Player player, ItemStack itemstack) {
 		if (!player.canEat(false)) {
-			return ActionResultType.PASS;
+			return InteractionResult.PASS;
 		}
 		player.awardStat(Stats.ITEM_USED.get(this.asItem()));
-		world.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundCategory.PLAYERS, 0.8F, 1.0F + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.4F);
+		level.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 1.0F + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.4F);
 		player.getFoodData().eat(this.asItem(), this.getPancakeItem(1));
-		setPancakes(world, pos, state, state.getValue(PANCAKES) - 1);
-		return ActionResultType.SUCCESS;
+		setPancakes(level, pos, state, state.getValue(PANCAKES) - 1);
+		return InteractionResult.SUCCESS;
 	}
 
-	protected static void setPancakes(World world, BlockPos pos, BlockState state, int i) {
+	protected static void setPancakes(Level level, BlockPos pos, BlockState state, int i) {
 		if (i > 0) {
-			world.setBlock(pos, state.setValue(PANCAKES, i), 3);
+			level.setBlock(pos, state.setValue(PANCAKES, i), 3);
 		} else {
-			world.removeBlock(pos, false);
+			level.removeBlock(pos, false);
 		}
 	}
 
 	@Override
-	public boolean canBeReplaced(BlockState state, BlockItemUseContext context) {
+	public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
 		return context.getItemInHand().getItem() == this.asItem() && state.getValue(PANCAKES) < 16 || super.canBeReplaced(state, context);
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction direction, BlockState facingState, IWorld world, BlockPos pos, BlockPos facingPos) {
-		return direction == Direction.DOWN && !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, facingState, world, pos, facingPos);
+	public BlockState updateShape(BlockState state, Direction direction, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
+		return direction == Direction.DOWN && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, facingState, level, pos, facingPos);
 	}
 
-	protected boolean isValidGround(BlockState state, IBlockReader world, BlockPos pos) {
-		return state.isFaceSturdy(world, pos, Direction.UP) || (state.getBlock() == this && state.getValue(PANCAKES) == 16);
+	protected boolean isValidGround(BlockState state, BlockGetter level, BlockPos pos) {
+		return state.isFaceSturdy(level, pos, Direction.UP) || (state.getBlock() == this && state.getValue(PANCAKES) == 16);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos blockpos = pos.below();
-		return this.isValidGround(world.getBlockState(blockpos), world, blockpos);
+		return this.isValidGround(level.getBlockState(blockpos), level, blockpos);
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(PANCAKES);
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, World world, BlockPos pos) {
+	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
 		return blockState.getValue(PANCAKES) - 1;
 	}
 
@@ -189,7 +189,7 @@ public class PancakeBlock extends Block {
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
 		return false;
 	}
 }

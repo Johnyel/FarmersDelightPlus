@@ -1,45 +1,45 @@
 package johnyele.farmersdelightplus.advancements;
 
 import com.google.gson.JsonObject;
-import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
-import net.minecraft.advancements.criterion.CriterionInstance;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.MinMaxBounds;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.loot.ConditionArrayParser;
-import net.minecraft.loot.ConditionArraySerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.critereon.SerializationContext;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
 
 import johnyele.farmersdelightplus.FarmersdelightplusMod;
 
-public class PancakeRecipeTrigger extends AbstractCriterionTrigger<PancakeRecipeTrigger.Instance> {
+public class PancakeRecipeTrigger extends SimpleCriterionTrigger<PancakeRecipeTrigger.TriggerInstance> {
 	public static final ResourceLocation ID = FarmersdelightplusMod.asResource("pancake_recipe_applied");
 
 	public ResourceLocation getId() {
 		return ID;
 	}
 
-	public PancakeRecipeTrigger.Instance createInstance(JsonObject jsonobject, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser) {
-		MinMaxBounds.IntBound minmaxbounds$ints = MinMaxBounds.IntBound.fromJson(jsonobject.get("pancakes"));
-		return new PancakeRecipeTrigger.Instance(entityPredicate, minmaxbounds$ints);
+	public PancakeRecipeTrigger.TriggerInstance createInstance(JsonObject jsonobject, EntityPredicate.Composite entityPredicate, DeserializationContext conditionsParser) {
+		MinMaxBounds.Ints minmaxbounds$ints = MinMaxBounds.Ints.fromJson(jsonobject.get("pancakes"));
+		return new PancakeRecipeTrigger.TriggerInstance(entityPredicate, minmaxbounds$ints);
 	}
 
-	public void trigger(ServerPlayerEntity player, int pancakes) {
+	public void trigger(ServerPlayer player, int pancakes) {
 		this.trigger(player, (instance) -> {
 			return instance.matches(pancakes);
 		});
 	}
 
-	public static class Instance extends CriterionInstance {
-		private final MinMaxBounds.IntBound pancakes;
+	public static class TriggerInstance extends AbstractCriterionTriggerInstance {
+		private final MinMaxBounds.Ints pancakes;
 
-		public Instance(EntityPredicate.AndPredicate entityPredicate, MinMaxBounds.IntBound pancakes) {
+		public TriggerInstance(EntityPredicate.Composite entityPredicate, MinMaxBounds.Ints pancakes) {
 			super(PancakeRecipeTrigger.ID, entityPredicate);
 			this.pancakes = pancakes;
 		}
 
-		public JsonObject serializeToJson(ConditionArraySerializer serializer) {
-			JsonObject jsonobject = super.serializeToJson(serializer);
+		public JsonObject serializeToJson(SerializationContext context) {
+			JsonObject jsonobject = super.serializeToJson(context);
 			jsonobject.add("pancakes", this.pancakes.serializeToJson());
 			return jsonobject;
 		}

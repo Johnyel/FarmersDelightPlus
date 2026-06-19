@@ -8,6 +8,7 @@ public class ModCommonConfig {
 
 	public static ForgeConfigSpec.BooleanValue BUTCHER_FDP_TRADES;
 	public static ForgeConfigSpec.BooleanValue WANDERING_TRADER_FDP_TRADES;
+	public static ForgeConfigSpec.BooleanValue ENABLE_FROGSPAWN_BOWL_PICKING_UP;
 	public static ForgeConfigSpec.BooleanValue ENABLE_PANCAKE_BOWL_PICKING_UP;
 	public static ForgeConfigSpec.BooleanValue PANCAKES_IN_SKILLET_ONLY;
 
@@ -21,6 +22,10 @@ public class ModCommonConfig {
 		WANDERING_TRADER_FDP_TRADES = BUILDER
 			.comment("Should the Wandering Trader has some of this mod's new trades?")
 			.define("wanderingTraderFDPTrades", true);
+
+		ENABLE_FROGSPAWN_BOWL_PICKING_UP = BUILDER
+			.comment("Should frogspawn be picked up using a bowl? (It can always be obtained with Silk Touch)")
+			.define("enableFrogspawnBowlPickingUp", true);
 
 		ENABLE_PANCAKE_BOWL_PICKING_UP = BUILDER
 			.comment("Should pancakes be picked up using a bowl?")

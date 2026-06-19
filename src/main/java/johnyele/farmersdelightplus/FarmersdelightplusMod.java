@@ -3,30 +3,31 @@ package johnyele.farmersdelightplus;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import net.minecraftforge.fml.network.simple.SimpleChannel;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.common.thread.SidedThreadGroups;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
 
+import johnyele.farmersdelightplus.registry.ModRecipeTypes;
 import johnyele.farmersdelightplus.registry.ModRecipeSerializers;
 import johnyele.farmersdelightplus.registry.ModItems;
 import johnyele.farmersdelightplus.registry.ModEffects;
 import johnyele.farmersdelightplus.registry.ModBlocks;
 import johnyele.farmersdelightplus.event.CommonSetupEvent;
-import johnyele.farmersdelightplus.event.ClientSetupEvent;
 import johnyele.farmersdelightplus.config.ModCommonConfig;
 import johnyele.farmersdelightplus.config.ModClientConfig;
 
@@ -49,12 +50,10 @@ public class FarmersdelightplusMod {
 	public FarmersdelightplusMod() {
 		// Start of user code block mod constructor
 		// End of user code block mod constructor
-		MinecraftForge.EVENT_BUS.register(new FarmersdelightplusModFMLBusEvents(this));
+		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		bus.register(this);
 		// Start of user code block mod init
 		//
-		bus.addListener(ClientSetupEvent::init);
 		bus.addListener(CommonSetupEvent::init);
 		//
 		// Config
@@ -68,12 +67,13 @@ public class FarmersdelightplusMod {
 		//
 		// Recipes
 		ModRecipeSerializers.REGISTRY.register(bus);
+		ModRecipeTypes.REGISTRY.register(bus);
 		//
 		// End of user code block mod init
 	}
 
 	// Start of user code block mod methods
-	public static final ItemGroup CREATIVE_TAB = new ItemGroup(MODID) {
+	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(MODID) {
 		@Nonnull
 		@Override
 		public ItemStack makeIcon() {
@@ -91,15 +91,15 @@ public class FarmersdelightplusMod {
 	}
 
 	public static boolean isFDLoaded() {
-		return net.minecraftforge.fml.ModList.get().isLoaded(FDID);
+		return ModList.get().isLoaded(FDID);
 	}
 
 	// End of user code block mod methods
 	private static final String PROTOCOL_VERSION = "1";
-	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, clientVersion -> true);
 	private static int messageID = 0;
 
-	public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, PacketBuffer> encoder, Function<PacketBuffer, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {
+	public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {
 		PACKET_HANDLER.registerMessage(messageID, messageType, encoder, decoder, messageConsumer);
 		messageID++;
 	}
@@ -111,25 +111,17 @@ public class FarmersdelightplusMod {
 			workQueue.add(new AbstractMap.SimpleEntry<>(action, tick));
 	}
 
-	private static class FarmersdelightplusModFMLBusEvents {
-		private final FarmersdelightplusMod parent;
-
-		FarmersdelightplusModFMLBusEvents(FarmersdelightplusMod parent) {
-			this.parent = parent;
-		}
-
-		@SubscribeEvent
-		public void tick(TickEvent.ServerTickEvent event) {
-			if (event.phase == TickEvent.Phase.END) {
-				List<AbstractMap.SimpleEntry<Runnable, Integer>> actions = new ArrayList<>();
-				workQueue.forEach(work -> {
-					work.setValue(work.getValue() - 1);
-					if (work.getValue() == 0)
-						actions.add(work);
-				});
-				actions.forEach(e -> e.getKey().run());
-				workQueue.removeAll(actions);
-			}
+	@SubscribeEvent
+	public void tick(TickEvent.ServerTickEvent event) {
+		if (event.phase == TickEvent.Phase.END) {
+			List<AbstractMap.SimpleEntry<Runnable, Integer>> actions = new ArrayList<>();
+			workQueue.forEach(work -> {
+				work.setValue(work.getValue() - 1);
+				if (work.getValue() == 0)
+					actions.add(work);
+			});
+			actions.forEach(e -> e.getKey().run());
+			workQueue.removeAll(actions);
 		}
 	}
 }
