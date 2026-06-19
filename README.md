@@ -14,7 +14,7 @@ Farmer's Delight: Plus is compatible with mods like **Farmer’s Respite**, **Au
 
 ### Required Mod
 
-Please also check the [original mod](https://www.nexusmods.com/subnautica/mods/1108), that Farmer's Delight: Plus is built for and inspired by. To use this addon, you must download the original mod.
+Please also check the [original mod](https://github.com/vectorwing/FarmersDelight), that Farmer's Delight: Plus is built for and inspired by. To use this addon, you must download the original mod.
 
 ### Contributing
 
