@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "farmersdelightplus:item/assorted_pufferfish_in_tomato_sauce_1"
+  }
+}

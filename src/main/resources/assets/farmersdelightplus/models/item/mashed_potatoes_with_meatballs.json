@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "farmersdelightplus:item/mashed_potatoes_with_meatballs"
+  }
+}
