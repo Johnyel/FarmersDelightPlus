@@ -1,0 +1,28 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "wheat_dough",
+  "ingredients": [
+    {
+      "tag": "forge:dough_liquid"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    }
+  ],
+  "result": {
+    "item": "farmersdelight:wheat_dough",
+    "count": 3
+  }
+}

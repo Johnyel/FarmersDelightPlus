@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "white_sail",
+  "ingredients": [
+    {
+      "item": "create:sail_frame"
+    }
+  ],
+  "result": {
+    "item": "create:white_sail"
+  }
+}

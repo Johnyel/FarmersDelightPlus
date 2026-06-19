@@ -1,0 +1,25 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "group": "copper_valve_handle",
+  "key": {
+    "C": {
+      "tag": "forge:plates/copper"
+    },
+    "S": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "pattern": [
+    "CCC",
+    " S "
+  ],
+  "result": {
+    "item": "create:copper_valve_handle"
+  }
+}

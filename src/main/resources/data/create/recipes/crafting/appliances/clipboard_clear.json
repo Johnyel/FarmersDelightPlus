@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "clipboard",
+  "ingredients": [
+    {
+      "item": "create:clipboard"
+    }
+  ],
+  "result": {
+    "item": "create:clipboard"
+  }
+}

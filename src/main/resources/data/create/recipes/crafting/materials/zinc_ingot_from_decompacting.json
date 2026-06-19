@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "zinc_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/zinc"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "create:zinc_ingot"
+  }
+}

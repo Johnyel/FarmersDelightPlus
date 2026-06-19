@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "andesite_alloy",
+  "ingredients": [
+    {
+      "item": "create:andesite_alloy_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "create:andesite_alloy"
+  }
+}

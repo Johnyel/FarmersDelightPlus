@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:smelting",
+  "group": "glass",
+  "cookingtime": 50,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "create:vertical_framed_glass"
+  },
+  "result": "minecraft:glass"
+}
