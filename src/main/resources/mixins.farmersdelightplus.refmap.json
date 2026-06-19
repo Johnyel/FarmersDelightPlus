@@ -1,13 +1,13 @@
 {
   "mappings": {
     "johnyele/farmersdelightplus/mixin/SalmonRendererMixin": {
-      "getTextureLocation": "Lnet/minecraft/client/renderer/entity/SalmonRenderer;func_110775_a(Lnet/minecraft/entity/passive/fish/SalmonEntity;)Lnet/minecraft/util/ResourceLocation;"
+      "getTextureLocation": "Lnet/minecraft/client/renderer/entity/SalmonRenderer;m_5478_(Lnet/minecraft/world/entity/animal/Salmon;)Lnet/minecraft/resources/ResourceLocation;"
     }
   },
   "data": {
     "searge": {
       "johnyele/farmersdelightplus/mixin/SalmonRendererMixin": {
-        "getTextureLocation": "Lnet/minecraft/client/renderer/entity/SalmonRenderer;func_110775_a(Lnet/minecraft/entity/passive/fish/SalmonEntity;)Lnet/minecraft/util/ResourceLocation;"
+        "getTextureLocation": "Lnet/minecraft/client/renderer/entity/SalmonRenderer;m_5478_(Lnet/minecraft/world/entity/animal/Salmon;)Lnet/minecraft/resources/ResourceLocation;"
       }
     }
   }
