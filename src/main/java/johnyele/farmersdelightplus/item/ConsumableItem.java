@@ -1,15 +1,15 @@
-package johnyele.farmersdelightplus.item;
+package johnyele.farmersdelightplus.item;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
 import johnyele.farmersdelightplus.config.ModClientConfig;
 import johnyele.farmersdelightplus.util.TooltipUtils;
@@ -45,7 +45,7 @@ public class ConsumableItem extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack itemstack, @Nullable World world, List<ITextComponent> list, ITooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack itemstack, @Nullable Level level, List<Component> list, TooltipFlag isAdvanced) {
 		if (ModClientConfig.FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasEffectTooltip) {
 				TooltipUtils.addFoodEffectTooltip(itemstack, list);
@@ -54,30 +54,29 @@ public class ConsumableItem extends Item {
 	}
 	
 	@Override
-	public ItemStack finishUsingItem(ItemStack itemstack, World world, LivingEntity consumer) {
+	public ItemStack finishUsingItem(ItemStack itemstack, Level level, LivingEntity consumer) {
 		ItemStack containerStack = itemstack.getContainerItem();
 
 		if (itemstack.isEdible()) {
-			super.finishUsingItem(itemstack, world, consumer);
+			super.finishUsingItem(itemstack, level, consumer);
 		} else {
-			PlayerEntity player = consumer instanceof PlayerEntity ? (PlayerEntity)consumer : null;
+			Player player = consumer instanceof Player ? (Player) consumer : null;
 			if (player != null) {
-				if (player instanceof ServerPlayerEntity) {
-					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity)player, itemstack);
+				if (player instanceof ServerPlayer) {
+					CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, itemstack);
 				}
 				player.awardStat(Stats.ITEM_USED.get(this));
-				if (!player.abilities.instabuild) {
+				if (!player.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
 			}
 		}
-		
+
 		if (itemstack.isEmpty()) {
 			return containerStack;
 		} else {
-			if (consumer instanceof PlayerEntity && !((PlayerEntity)consumer).abilities.instabuild) {
-				PlayerEntity player = (PlayerEntity) consumer;
-				if (!player.inventory.add(containerStack)) {
+			if (consumer instanceof Player player && !player.getAbilities().instabuild) {
+				if (!player.getInventory().add(containerStack)) {
 					player.drop(containerStack, false);
 				}
 			}

@@ -1,22 +1,22 @@
 package johnyele.farmersdelightplus.event;
 
-import net.minecraftforge.common.BasicTrade;
+import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 
-import johnyele.farmersdelightplus.FarmersdelightplusMod;
 import johnyele.farmersdelightplus.config.ModCommonConfig;
+import johnyele.farmersdelightplus.FarmersdelightplusMod;
 import johnyele.farmersdelightplus.registry.ModItems;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -30,7 +30,7 @@ public class VillagerEvents {
 		if (!ModCommonConfig.BUTCHER_FDP_TRADES.get()) return;
 		if (!FarmersdelightplusMod.isFDLoaded()) return;
 
-		Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+		Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 		VillagerProfession profession = event.getType();
 		ResourceLocation professionKey = ForgeRegistries.PROFESSIONS.getKey(profession);
 		if (professionKey == null) return;
@@ -61,7 +61,7 @@ public class VillagerEvents {
 		if (!FarmersdelightplusMod.isFDLoaded()) return;
 		
 		if (ModCommonConfig.WANDERING_TRADER_FDP_TRADES.get()) {
-			List<VillagerTrades.ITrade> trades = event.getGenericTrades();
+			List<VillagerTrades.ItemListing> trades = event.getGenericTrades();
 
 			// Wild Crops for Emeralds
 			trades.add(itemForEmeraldTrade(2, getFDItem("sandy_shrub"), 1, 12));
@@ -77,6 +77,7 @@ public class VillagerEvents {
 
 			// Vanilla Items for Emeralds
 			trades.add(itemForEmeraldTrade(1, Items.INK_SAC, 5, 1, 12));
+			trades.add(itemForEmeraldTrade(2, Items.GLOW_INK_SAC, 5, 1, 12));
 			trades.add(itemForEmeraldTrade(5, Items.SCUTE, 1, 12));
 
 			// Emeralds for Vanilla Items
@@ -104,20 +105,20 @@ public class VillagerEvents {
 		}
 	}
 
-	public static VillagerTrades.ITrade emeraldForItemTrade(IItemProvider item, int count, int emeralds, int maxTrades, int xp) {
-		return new BasicTrade(new ItemStack(item, count), new ItemStack(Items.EMERALD, emeralds), maxTrades, xp, 0.05F);
+	public static BasicItemListing emeraldForItemTrade(ItemLike item, int count, int emeralds, int maxTrades, int xp) {
+		return new BasicItemListing(new ItemStack(item, count), new ItemStack(Items.EMERALD, emeralds), maxTrades, xp, 0.05F);
 	}
 
-	public static VillagerTrades.ITrade emeraldForItemTrade(IItemProvider item, int emeralds, int maxTrades, int xp) {
-		return new BasicTrade(new ItemStack(item), new ItemStack(Items.EMERALD, emeralds), maxTrades, xp, 0.05F);
+	public static BasicItemListing emeraldForItemTrade(ItemLike item, int emeralds, int maxTrades, int xp) {
+		return new BasicItemListing(new ItemStack(item), new ItemStack(Items.EMERALD, emeralds), maxTrades, xp, 0.05F);
 	}
 
-	public static VillagerTrades.ITrade itemForEmeraldTrade(int emeralds, IItemProvider item, int count, int maxTrades, int xp) {
-		return new BasicTrade(emeralds, new ItemStack(item, count), maxTrades, xp, 0.05F);
+	public static BasicItemListing itemForEmeraldTrade(int emeralds, ItemLike item, int count, int maxTrades, int xp) {
+		return new BasicItemListing(emeralds, new ItemStack(item, count), maxTrades, xp, 0.05F);
 	}
 
-	public static VillagerTrades.ITrade itemForEmeraldTrade(int emeralds, IItemProvider item, int maxTrades, int xp) {
-		return new BasicTrade(emeralds, new ItemStack(item), maxTrades, xp, 0.05F);
+	public static BasicItemListing itemForEmeraldTrade(int emeralds, ItemLike item, int maxTrades, int xp) {
+		return new BasicItemListing(emeralds, new ItemStack(item), maxTrades, xp, 0.05F);
 	}
 
 	private static Item getFDItem(String id) {

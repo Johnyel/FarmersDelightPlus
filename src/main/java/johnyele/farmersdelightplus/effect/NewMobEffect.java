@@ -1,11 +1,11 @@
 package johnyele.farmersdelightplus.effect;
 
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffect;
 
-public class NewMobEffect extends Effect {
+public class NewMobEffect extends MobEffect {
 	public NewMobEffect(int color) {
-		super(EffectType.BENEFICIAL, color);
+		super(MobEffectCategory.BENEFICIAL, color);
 	}
 
 	@Override

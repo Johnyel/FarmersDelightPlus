@@ -1,34 +1,34 @@
-package johnyele.farmersdelightplus.item.crafting;
+package johnyele.farmersdelightplus.item.crafting;
 
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.Property;
-import net.minecraft.util.Hand;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.Level;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
-public class PancakeRecipe implements IRecipe<RecipeWrapper> {	
+public class PancakeRecipe implements Recipe<RecipeWrapper> {
 	private static final String DEFAULT_PROPERTY = "pancakes";
 	private final ResourceLocation id;
 	private final String soundId;
@@ -90,7 +90,7 @@ public class PancakeRecipe implements IRecipe<RecipeWrapper> {
 	}
 
 	@Override
-	public boolean matches(RecipeWrapper inv, World world) {
+	public boolean matches(RecipeWrapper inv, Level level) {
 		if (inv.isEmpty())
 			return false;
 		return input.test(inv.getItem(0));
@@ -112,13 +112,13 @@ public class PancakeRecipe implements IRecipe<RecipeWrapper> {
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return ModRecipeSerializers.PANCAKE_FILLING.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
-		return ModRecipeTypes.PANCAKE_FILLING;
+	public RecipeType<?> getType() {
+		return ModRecipeTypes.PANCAKE_FILLING.get();
 	}
 
 	public String getPropertiyName() {
@@ -133,14 +133,15 @@ public class PancakeRecipe implements IRecipe<RecipeWrapper> {
 		float j = (float) (1 / this.getMultiplier());		
 		return new int[] {(int) (i / j), (int) (i % j)};
 	}
-	
-	public static boolean tryCraft(World world, ItemStack itemstack, BlockPos pos, BlockState state, PlayerEntity player) {
+
+	public static boolean tryCraft(Level level, ItemStack itemstack, BlockPos pos, BlockState state, Player player) {
 		if (itemstack.isEmpty() || state.isAir()) return false;
 
+		RecipeType<PancakeRecipe> type = ModRecipeTypes.PANCAKE_FILLING.get();
 		RecipeWrapper wrapper = new RecipeWrapper(new ItemStackHandler(1));
 		wrapper.setItem(0, itemstack);
-		
-		List<PancakeRecipe> recipeList = world.getRecipeManager().getRecipesFor(ModRecipeTypes.PANCAKE_FILLING, wrapper, world);
+
+		List<PancakeRecipe> recipeList = level.getRecipeManager().getRecipesFor(type, wrapper, level);
 		if (recipeList.isEmpty()) {
 			return false;
 		}
@@ -150,73 +151,73 @@ public class PancakeRecipe implements IRecipe<RecipeWrapper> {
 			return false;
 		}
 		
-		if (world.isClientSide()) return true;
+		if (level.isClientSide()) return true;
 
 		PancakeRecipe recipe = foundRecipe.get();
-		playCraftingSound(world, pos, recipe.getSoundId());
+		playCraftingSound(level, pos, recipe.getSoundId());
 		int pancakes = state.getValue(PancakeBlock.PANCAKES);
 		int[] count = recipe.getCraftedCount(pancakes);
-		recipe.transformBlock(world, pos, count[0]);
+		recipe.transformBlock(level, pos, count[0]);
 		
-		InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModItems.EMPTY_PANCAKE.get(), count[1]));
+		Block.popResource(level, pos, new ItemStack(ModItems.EMPTY_PANCAKE.get(), count[1]));
 		player.awardStat(Stats.ITEM_CRAFTED.get(recipe.getResultItem().getItem()), count[0]);
 		consumeItemStack(player, itemstack);
 		
-		if (player instanceof ServerPlayerEntity) {
-			ModAdvancements.PANCAKE_RECIPE.trigger((ServerPlayerEntity)player, pancakes);
+		if (player instanceof ServerPlayer) {
+			ModAdvancements.PANCAKE_RECIPE.trigger((ServerPlayer) player, pancakes);
 		}
 		return true;
 	}
 
-	public static void consumeItemStack(PlayerEntity player, ItemStack itemstack) {
+	public static void consumeItemStack(Player player, ItemStack itemstack) {
 		player.awardStat(Stats.ITEM_USED.get(itemstack.getItem()));
-		if (player.abilities.instabuild) return;
+		if (player.getAbilities().instabuild) return;
 		if (itemstack.hasTag() && itemstack.getTag().getBoolean("Unbreakable")) return;
 		
 		boolean flag = itemstack.hasContainerItem();
 		ItemStack containerStack = itemstack.getContainerItem();
 		
 		if (itemstack.isDamageableItem()) {
-			itemstack.hurtAndBreak(1, player, s -> s.broadcastBreakEvent(Hand.MAIN_HAND));
+			itemstack.hurtAndBreak(1, player, s -> s.broadcastBreakEvent(InteractionHand.MAIN_HAND));
 		} else {
 			itemstack.shrink(1);
 		}
 
 		if (flag) {
 			if (itemstack.isEmpty()) {
-				player.setItemInHand(Hand.MAIN_HAND, containerStack);
-				player.inventory.setChanged();
+				player.setItemInHand(InteractionHand.MAIN_HAND, containerStack);
+				player.getInventory().setChanged();
 			} else {
-				if (!player.inventory.add(containerStack)) {
+				if (!player.getInventory().add(containerStack)) {
 					player.drop(containerStack, false);
 				}
 			}
 		}
 	}
 
-	public static void playCraftingSound(World world, BlockPos pos, String soundId) {
+	public static void playCraftingSound(Level level, BlockPos pos, String soundId) {
 		SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(soundId));
-
+		
 		if (sound != null) {
-			world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 		} else {
-			world.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 
-	private void transformBlock(World world, BlockPos pos, int pancakes) {
+	private void transformBlock(Level level, BlockPos pos, int pancakes) {
 		ItemStack itemstack = this.result.copy();
 		itemstack.setCount(pancakes);
 		
-		if (itemstack.getItem() instanceof BlockItem) {
-			BlockState blockstate = ((BlockItem)itemstack.getItem()).getBlock().defaultBlockState();
+		if (itemstack.getItem() instanceof BlockItem blockitem) {
+			BlockState blockstate = blockitem.getBlock().defaultBlockState();
 			blockstate = withSetPropertiy(blockstate, this.propertyName, pancakes, itemstack);
-			world.setBlock(pos, blockstate, 3);
+			level.setBlock(pos, blockstate, 3);
 		} else {
-			world.destroyBlock(pos, false);
+			level.destroyBlock(pos, false);
 		}
 		
-		InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), itemstack);
+		Block.popResource(level, pos, itemstack);
 	}
 	
 	private static BlockState withSetPropertiy(BlockState state, String name, int pancakes, ItemStack itemstack) {
@@ -242,19 +243,20 @@ public class PancakeRecipe implements IRecipe<RecipeWrapper> {
     	return null;
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<PancakeRecipe> {
+	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<PancakeRecipe> {
+		public static final ResourceLocation ID = FarmersdelightplusMod.asResource("pancake_filling");
 
 		@Override
 		public PancakeRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-			final String soundId = JSONUtils.getAsString(json, "sound", "");
-			final Ingredient input = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ingredient"));
+			final String soundId = GsonHelper.getAsString(json, "sound", "");
+			final Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
 			if (input.isEmpty()) {
 				throw new JsonParseException("Empty or invalid ingredient");
 			}
-			final JsonObject resultObject = JSONUtils.getAsJsonObject(json, "result");
-			final ItemStack result = ShapedRecipe.itemFromJson(resultObject);
-			final String propertyName = JSONUtils.getAsString(resultObject, "block_property", DEFAULT_PROPERTY);
-			final double multiplier = (double)JSONUtils.getAsFloat(resultObject, "multiplier", 1.0F);
+			final JsonObject resultObject = GsonHelper.getAsJsonObject(json, "result");
+			final ItemStack result = new ItemStack(ShapedRecipe.itemFromJson(resultObject));
+			final String propertyName = GsonHelper.getAsString(resultObject, "block_property", "pancakes");
+			final double multiplier = GsonHelper.getAsDouble(resultObject, "multiplier", 1);
 			if (multiplier <= 0) {
 				throw new JsonParseException("Expected " + multiplier + " to be positive number");
 			}
@@ -264,7 +266,7 @@ public class PancakeRecipe implements IRecipe<RecipeWrapper> {
 		
 		@Nullable
 		@Override
-		public PancakeRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+		public PancakeRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
 			String soundId = buffer.readUtf();
 			Ingredient input = Ingredient.fromNetwork(buffer);
 			ItemStack result = buffer.readItem();
@@ -275,7 +277,7 @@ public class PancakeRecipe implements IRecipe<RecipeWrapper> {
 		}
 
 		@Override
-		public void toNetwork(PacketBuffer buffer, PancakeRecipe recipe) {
+		public void toNetwork(FriendlyByteBuf buffer, PancakeRecipe recipe) {
 			buffer.writeUtf(recipe.soundId);
 			recipe.input.toNetwork(buffer);
 			buffer.writeItem(recipe.result);

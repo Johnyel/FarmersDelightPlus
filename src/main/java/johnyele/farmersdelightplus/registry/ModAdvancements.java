@@ -1,6 +1,8 @@
 package johnyele.farmersdelightplus.registry;
 
+import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
+
 import johnyele.farmersdelightplus.advancements.PancakeRecipeTrigger;
 
 public class ModAdvancements {

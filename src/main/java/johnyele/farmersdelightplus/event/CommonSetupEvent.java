@@ -1,17 +1,15 @@
 package johnyele.farmersdelightplus.event;
 
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraft.block.ComposterBlock;
+import net.minecraft.world.level.block.ComposterBlock;
 
 import johnyele.farmersdelightplus.registry.ModAdvancements;
 import johnyele.farmersdelightplus.registry.ModItems;
-import johnyele.farmersdelightplus.registry.ModRecipeTypes;
 
 public class CommonSetupEvent {
 
 	public static void init(final FMLCommonSetupEvent event) {
 		registerCompostables();
-		ModRecipeTypes.register();
 		ModAdvancements.register();
 	}
 
