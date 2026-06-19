@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "group": "rose_hip_pie",
+  "key": {
+    "r": {
+      "item": "farmersrespite:rose_hip_pie_slice"
+    }
+  },
+  "pattern": [
+    "rr",
+    "rr"
+  ],
+  "result": {
+    "item": "farmersrespite:rose_hip_pie"
+  }
+}

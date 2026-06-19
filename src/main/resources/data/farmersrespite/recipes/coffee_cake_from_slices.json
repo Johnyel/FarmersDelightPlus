@@ -1,0 +1,36 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "coffee_cake",
+  "ingredients": [
+    {
+      "item": "farmersrespite:coffee_cake_slice"
+    },
+    {
+      "item": "farmersrespite:coffee_cake_slice"
+    },
+    {
+      "item": "farmersrespite:coffee_cake_slice"
+    },
+    {
+      "item": "farmersrespite:coffee_cake_slice"
+    },
+    {
+      "item": "farmersrespite:coffee_cake_slice"
+    },
+    {
+      "item": "farmersrespite:coffee_cake_slice"
+    },
+    {
+      "item": "farmersrespite:coffee_cake_slice"
+    }
+  ],
+  "result": {
+    "item": "farmersrespite:coffee_cake"
+  }
+}
