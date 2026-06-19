@@ -7,6 +7,7 @@
         "tray_top": "farmersdelightplus:block/tray_rice_honey_garnish",
         "tray_side": "farmersdelight:block/tray_bottom"
     },
+    "render_type": "cutout",
     "elements": [
         {
             "from": [-2.75, 2.5, 12.75],

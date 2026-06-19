@@ -7,6 +7,7 @@
         "tray_top": "farmersdelightplus:block/tray_rice_with_tomato_sauce",
         "tray_side": "farmersdelight:block/tray_bottom"
     },
+    "render_type": "cutout",
     "elements": [
         {
             "from": [11.34828, 3.93424, 7.5],
