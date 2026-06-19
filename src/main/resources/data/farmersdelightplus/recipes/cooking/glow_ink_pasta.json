@@ -13,10 +13,7 @@
       "tag": "forge:pasta/raw_pasta"
     },
     {
-      "item": "minecraft:ink_sac"
-    },
-    {
-      "tag": "forge:dusts/glowstone"
+      "item": "minecraft:glow_ink_sac"
     },
     {
       "item": "minecraft:carrot"

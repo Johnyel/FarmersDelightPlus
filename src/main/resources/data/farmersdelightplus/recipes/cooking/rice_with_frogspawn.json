@@ -7,17 +7,20 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "minecraft:potato"
+      "item": "minecraft:kelp"
     },
     {
-      "item": "minecraft:glow_berries"
+      "item": "minecraft:tropical_fish"
     },
     {
-      "tag": "forge:salad_ingredients"
+      "item": "minecraft:frogspawn"
+    },
+    {
+      "tag": "forge:crops/rice"
     }
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "farmersdelightplus:sparkling_potato"
+    "item": "farmersdelightplus:rice_with_frogspawn"
   }
 }

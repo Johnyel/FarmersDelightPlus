@@ -10,10 +10,10 @@
       "item": "minecraft:apple"
     },
     {
-      "item": "minecraft:sweet_berries"
+      "tag": "forge:compote_berries"
     },
     {
-      "item": "minecraft:sweet_berries"
+      "tag": "forge:compote_berries"
     },
     {
       "item": "minecraft:sugar"

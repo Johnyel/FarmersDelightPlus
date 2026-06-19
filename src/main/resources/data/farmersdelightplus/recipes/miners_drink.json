@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:acacia_leaves"
+      "item": "minecraft:glow_berries"
     },
     {
-      "tag": "forge:dusts/glowstone"
-    },
-    {
-      "tag": "forge:dusts/glowstone"
+      "item": "minecraft:azalea_leaves"
     },
     {
       "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
     },
     {
       "item": "farmersdelight:milk_bottle"
