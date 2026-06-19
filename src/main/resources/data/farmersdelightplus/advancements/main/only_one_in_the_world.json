@@ -4,7 +4,9 @@
     "consumed_rice_with_dragon_egg": {
       "conditions": {
         "item": {
-          "item": "farmersdelightplus:honeyed_rice_with_dragon_egg"
+          "items": [
+            "farmersdelightplus:honeyed_rice_with_dragon_egg"
+          ]
         }
       },
       "trigger": "minecraft:consume_item"

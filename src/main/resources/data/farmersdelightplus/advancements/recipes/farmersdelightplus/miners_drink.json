@@ -1,11 +1,14 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_glowstone_dust": {
+    "has_any_ingredient": {
       "conditions": {
         "items": [
           {
-            "item": "minecraft:glowstone_dust"
+            "items": [
+              "minecraft:glow_berries",
+              "minecraft:azalea_leaves"
+            ]
           }
         ]
       },
@@ -20,7 +23,7 @@
   },
   "requirements": [
     [
-      "has_glowstone_dust",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ],

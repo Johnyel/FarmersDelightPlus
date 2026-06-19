@@ -1,11 +1,14 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_golden_carrot": {
+    "has_any_ingredient": {
       "conditions": {
         "items": [
           {
-            "item": "minecraft:golden_carrot"
+            "items": [
+              "minecraft:cooked_beef",
+              "minecraft:golden_carrot"
+            ]
           }
         ]
       },
@@ -20,7 +23,7 @@
   },
   "requirements": [
     [
-      "has_golden_carrot",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ],

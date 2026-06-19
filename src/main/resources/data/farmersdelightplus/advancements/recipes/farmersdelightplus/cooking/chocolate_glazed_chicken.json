@@ -1,12 +1,14 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_wheat": {
+    "has_any_ingredient": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:wheat"
+              "minecraft:chicken",
+              "minecraft:cooked_chicken",
+              "minecraft:cocoa_beans"
             ]
           }
         ]
@@ -15,20 +17,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelightplus:pancake_dough"
+        "recipe": "farmersdelightplus:cooking/chocolate_glazed_chicken"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_wheat",
+      "has_any_ingredient",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelightplus:pancake_dough"
+      "farmersdelightplus:cooking/chocolate_glazed_chicken"
     ]
   }
 }

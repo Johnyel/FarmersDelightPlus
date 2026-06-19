@@ -1,12 +1,14 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_wheat": {
+    "has_porkchop": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:wheat"
+              "minecraft:porkchop",
+              "minecraft:cooked_porkchop",
+              "minecraft:sweet_berries"
             ]
           }
         ]
@@ -15,20 +17,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelightplus:pancake_dough"
+        "recipe": "farmersdelightplus:cooking/festive_porkchop_with_berries"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_wheat",
+      "has_porkchop",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelightplus:pancake_dough"
+      "farmersdelightplus:cooking/festive_porkchop_with_berries"
     ]
   }
 }

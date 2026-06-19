@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_wheat": {
+    "has_rice": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:wheat"
+              "farmersdelight:rice"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelightplus:pancake_dough"
+        "recipe": "farmersdelightplus:cooking/honeyed_rice_with_berries"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_wheat",
+      "has_rice",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelightplus:pancake_dough"
+      "farmersdelightplus:cooking/honeyed_rice_with_berries"
     ]
   }
 }

@@ -13,9 +13,22 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_seafood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:sea_pickle",
+              "minecraft:kelp"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelightplus:rice_dough_from_eggs"
+        "recipe": "farmersdelightplus:cooking/risotto"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +36,13 @@
   "requirements": [
     [
       "has_rice",
+      "has_seafood",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelightplus:rice_dough_from_eggs"
+      "farmersdelightplus:cooking/risotto"
     ]
   }
 }

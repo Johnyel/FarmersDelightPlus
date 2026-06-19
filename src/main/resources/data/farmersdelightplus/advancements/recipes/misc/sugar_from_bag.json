@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelightplus:sugar_bag"
+            "items": [
+              "farmersdelightplus:sugar_bag"
+            ]
           }
         ]
       },

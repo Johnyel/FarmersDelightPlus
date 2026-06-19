@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelight:rice"
+            "items": [
+              "farmersdelight:rice"
+            ]
           }
         ]
       },

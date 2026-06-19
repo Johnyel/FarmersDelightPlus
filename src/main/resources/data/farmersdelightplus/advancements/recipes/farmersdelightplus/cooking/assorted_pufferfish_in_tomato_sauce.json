@@ -1,12 +1,14 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_wheat": {
+    "has_any_pufferfish": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:wheat"
+              "minecraft:pufferfish",
+              "farmersdelightplus:pufferfish_slice",
+              "farmersdelightplus:cooked_pufferfish_slice"
             ]
           }
         ]
@@ -15,20 +17,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelightplus:pancake_dough"
+        "recipe": "farmersdelightplus:cooking/assorted_pufferfish_in_tomato_sauce"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_wheat",
+      "has_any_pufferfish",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelightplus:pancake_dough"
+      "farmersdelightplus:cooking/assorted_pufferfish_in_tomato_sauce"
     ]
   }
 }

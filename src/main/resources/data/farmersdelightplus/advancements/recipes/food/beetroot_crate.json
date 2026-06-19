@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:beetroot"
+            "items": [
+              "minecraft:beetroot"
+            ]
           }
         ]
       },

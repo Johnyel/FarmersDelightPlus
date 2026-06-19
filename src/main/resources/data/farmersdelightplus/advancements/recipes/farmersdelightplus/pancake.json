@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelightplus:empty_pancake"
+            "items": [
+              "farmersdelightplus:empty_pancake"
+            ]
           }
         ]
       },

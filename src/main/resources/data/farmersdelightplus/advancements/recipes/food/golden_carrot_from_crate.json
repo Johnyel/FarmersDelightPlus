@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelightplus:golden_carrot_crate"
+            "items": [
+              "farmersdelightplus:golden_carrot_crate"
+            ]
           }
         ]
       },

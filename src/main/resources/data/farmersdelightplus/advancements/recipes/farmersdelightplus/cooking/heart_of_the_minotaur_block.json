@@ -1,12 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_wheat": {
+    "has_beetroot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:wheat"
+              "minecraft:beetroot",
+              "farmersdelight:tomato_sauce"
             ]
           }
         ]
@@ -15,20 +16,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "farmersdelightplus:pancake_dough"
+        "recipe": "farmersdelightplus:cooking/heart_of_the_minotaur_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_wheat",
+      "has_beetroot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "farmersdelightplus:pancake_dough"
+      "farmersdelightplus:cooking/heart_of_the_minotaur_block"
     ]
   }
 }

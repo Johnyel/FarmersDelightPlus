@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:nautilus_shell"
+            "items": [
+              "minecraft:nautilus_shell"
+            ]
           }
         ]
       },

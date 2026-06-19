@@ -5,10 +5,15 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:glowstone_dust"
+            "items": [
+              "minecraft:glow_berries"
+            ]
           },
           {
-            "item": "farmersdelight:cabbage"
+            "items": [
+              "farmersdelight:cabbage",
+              "farmersdelight:cabbage_leaf"
+            ]
           }
         ]
       },

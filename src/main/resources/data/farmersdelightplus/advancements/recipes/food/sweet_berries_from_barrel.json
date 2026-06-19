@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelightplus:sweet_berry_barrel"
+            "items": [
+              "farmersdelightplus:sweet_berry_barrel"
+            ]
           }
         ]
       },

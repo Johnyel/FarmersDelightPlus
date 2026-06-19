@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "item": "farmersdelightplus:pufferfish_slice"
+            "items": [
+              "farmersdelightplus:pufferfish_slice"
+            ]
           }
         ]
       },
