@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "pancakes=1": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes1" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes1", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes1", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes1", "y": 270 }
+    ],
+    "pancakes=2": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes2" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes2", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes2", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes2", "y": 270 }
+    ],
+    "pancakes=3": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes3" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes3", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes3", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes3", "y": 270 }
+    ],
+    "pancakes=4": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes4" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes4", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes4", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes4", "y": 270 }
+    ],
+    "pancakes=5": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes5" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes5", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes5", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes5", "y": 270 }
+    ],
+    "pancakes=6": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes6" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes6", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes6", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes6", "y": 270 }
+    ],
+    "pancakes=7": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes7" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes7", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes7", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes7", "y": 270 }
+    ],
+    "pancakes=8": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes8" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes8", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes8", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes8", "y": 270 }
+    ],
+    "pancakes=9": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes9" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes9", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes9", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes9", "y": 270 }
+    ],
+    "pancakes=10": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes10" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes10", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes10", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes10", "y": 270 }
+    ],
+    "pancakes=11": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes11" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes11", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes11", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes11", "y": 270 }
+    ],
+    "pancakes=12": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes12" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes12", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes12", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes12", "y": 270 }
+    ],
+    "pancakes=13": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes13" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes13", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes13", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes13", "y": 270 }
+    ],
+    "pancakes=14": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes14" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes14", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes14", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes14", "y": 270 }
+    ],
+    "pancakes=15": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes15" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes15", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes15", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes15", "y": 270 }
+    ],
+    "pancakes=16": [
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes16" },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes16", "y": 90 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes16", "y": 180 },
+      { "model": "farmersdelightplus:block/berry_pancake_pancakes16", "y": 270 }
+    ]
+  }
+}
