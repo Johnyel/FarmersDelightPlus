@@ -1,0 +1,36 @@
+{
+  "parent": "farmersdelightplus:main/get_empty_pancake",
+  "criteria": {
+    "filling_applied": {
+      "conditions": {
+        "pancakes": {
+          "min": 2
+        }
+      },
+      "trigger": "farmersdelightplus:pancake_recipe_applied"
+    }
+  },
+  "display": {
+    "icon": {
+      "item": "farmersdelightplus:honey_pancake"
+    },
+    "title": {
+      "translate": "advancement.farmersdelightplus.apply_pancake_filling.title"
+    },
+    "description": {
+      "translate": "advancement.farmersdelightplus.apply_pancake_filling.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "filling_applied"
+    ]
+  ],
+  "rewards": {
+    "experience": 15
+  }
+}

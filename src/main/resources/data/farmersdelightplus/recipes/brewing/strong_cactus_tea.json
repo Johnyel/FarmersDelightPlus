@@ -1,0 +1,28 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "type": "farmersrespite:brewing",
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "cookingtime": 2400,
+  "experience": 0.35,
+  "group": "cactus_tea",
+  "ingredients": [
+    {
+      "item": "farmersdelightplus:cactus_tea"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    }
+  ],
+  "needwater": false,
+  "recipe_book_tab": "drinks",
+  "result": {
+    "item": "farmersdelightplus:strong_cactus_tea"
+  }
+}

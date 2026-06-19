@@ -1,0 +1,190 @@
+{
+  "parent": "farmersdelight:main/place_feast",
+  "criteria": {
+    "assorted_pufferfish_in_tomato_sauce": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:assorted_pufferfish_in_tomato_sauce"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "chocolate_glazed_chicken": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:chocolate_glazed_chicken"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "festive_porkchop_with_berries": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:festive_porkchop_with_berries"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "glow_ink_pasta": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:glow_ink_pasta"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "heart_of_the_minotaur": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:heart_of_the_minotaur"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "honeyed_rice_with_berries": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:honeyed_rice_with_berries"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "lagman": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:lagman"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "mashed_potatoes_with_meatballs": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:mashed_potatoes_with_meatballs"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "pho_soup": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:pho_soup"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "rice_pilaf": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:rice_pilaf"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "rice_with_black_caviar": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:rice_with_black_caviar"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "risotto": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:risotto"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "sparkling_potato": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:sparkling_potato"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "steak_with_golden_carrot": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:steak_with_golden_carrot"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "turtle_soup": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:turtle_soup"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "icon": {
+      "item": "farmersdelightplus:steak_with_golden_carrot"
+    },
+    "title": {
+      "translate": "advancement.farmersdelightplus.master_chef_deluxe.title"
+    },
+    "description": {
+      "translate": "advancement.farmersdelightplus.master_chef_deluxe.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "assorted_pufferfish_in_tomato_sauce"
+    ],
+    [
+      "chocolate_glazed_chicken"
+    ],
+    [
+      "festive_porkchop_with_berries"
+    ],
+    [
+      "glow_ink_pasta"
+    ],
+    [
+      "heart_of_the_minotaur"
+    ],
+    [
+      "honeyed_rice_with_berries"
+    ],
+    [
+      "lagman"
+    ],
+    [
+      "mashed_potatoes_with_meatballs"
+    ],
+    [
+      "pho_soup"
+    ],
+    [
+      "rice_pilaf"
+    ],
+    [
+      "rice_with_black_caviar"
+    ],
+    [
+      "risotto"
+    ],
+    [
+      "sparkling_potato"
+    ],
+    [
+      "steak_with_golden_carrot"
+    ],
+    [
+      "turtle_soup"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  }
+}

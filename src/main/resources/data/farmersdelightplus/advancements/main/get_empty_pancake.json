@@ -1,0 +1,38 @@
+{
+  "parent": "farmersdelight:main/place_skillet",
+  "criteria": {
+    "has_empty_pancake": {
+      "conditions": {
+        "items": [
+          {
+            "item": "farmersdelightplus:empty_pancake"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "icon": {
+      "item": "farmersdelightplus:empty_pancake"
+    },
+    "title": {
+      "translate": "advancement.farmersdelightplus.get_empty_pancake.title"
+    },
+    "description": {
+      "translate": "advancement.farmersdelightplus.get_empty_pancake.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "has_empty_pancake"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}

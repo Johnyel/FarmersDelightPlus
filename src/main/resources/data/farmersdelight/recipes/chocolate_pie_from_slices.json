@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "chocolate_pie",
+  "key": {
+    "#": {
+      "item": "farmersdelight:chocolate_pie_slice"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "farmersdelight:chocolate_pie"
+  }
+}

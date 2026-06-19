@@ -1,0 +1,36 @@
+{
+  "parent": "farmersdelight:main/place_feast",
+  "criteria": {
+    "consumed_rice_with_dragon_egg": {
+      "conditions": {
+        "item": {
+          "item": "farmersdelightplus:honeyed_rice_with_dragon_egg"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "icon": {
+      "item": "farmersdelightplus:honeyed_rice_with_dragon_egg_block"
+    },
+    "title": {
+      "translate": "advancement.farmersdelightplus.only_one_in_the_world.title"
+    },
+    "description": {
+      "translate": "advancement.farmersdelightplus.only_one_in_the_world.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "consumed_rice_with_dragon_egg"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}
