@@ -13,6 +13,7 @@
   "block.farmersdelightplus.berry_pancake": "Stapel Pfannkuchen in Beerensirup",
   "block.farmersdelightplus.chocolate_pancake": "Stapel Pfannkuchen in Schokolade",
   "block.farmersdelightplus.empty_pancake": "Stapel Pfannkuchen",
+  "block.farmersdelightplus.glow_berry_barrel": "Ein Fass mit leuchtenden Beeren",
   "block.farmersdelightplus.golden_carrot_crate": "Kiste mit goldenen Karotten",
   "block.farmersdelightplus.heart_of_the_minotaur_block": "Das Herz des Minotaurus",
   "block.farmersdelightplus.honey_pancake": "Stapel Pfannkuchen in Honigsirup",
@@ -55,7 +56,7 @@
   "item.farmersdelightplus.rice_dough": "Reisteig",
   "item.farmersdelightplus.rice_flatbread": "Reiskuchen",
   "item.farmersdelightplus.rice_pilaf": "Pilau",
-  "item.farmersdelightplus.rice_with_black_caviar": "Reis mit schwarzem Kaviar",
+  "item.farmersdelightplus.rice_with_frogspawn": "Reis mit Froschkaviar",
   "item.farmersdelightplus.risotto": "Risotto",
   "item.farmersdelightplus.shining_salad": "Funkelnder Salat",
   "item.farmersdelightplus.sparkling_potato": "Funkelnde Kartoffeln",
@@ -67,5 +68,6 @@
 
   "message.farmersdelightplus.pancake.invalid_block": "Das kann man hier nicht kochen...",
 
+  "farmersdelightplus.jei.info.frogspawn": "Kann mit einer Schüssel vorsichtig aus Wasser gesammelt werden",
   "farmersdelightplus.jei.pancake_filling": "Auf pfannkuchen auftragen"
 }

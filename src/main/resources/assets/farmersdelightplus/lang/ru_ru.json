@@ -13,6 +13,7 @@
   "block.farmersdelightplus.berry_pancake": "Стопка блинов в ягодном сиропе",
   "block.farmersdelightplus.chocolate_pancake": "Стопка блинов в шоколаде",
   "block.farmersdelightplus.empty_pancake": "Стопка блинов",
+  "block.farmersdelightplus.glow_berry_barrel": "Бочка светящихся ягод",
   "block.farmersdelightplus.golden_carrot_crate": "Ящик с золотой морковью",
   "block.farmersdelightplus.heart_of_the_minotaur_block": "Сердце минотавра",
   "block.farmersdelightplus.honey_pancake": "Стопка блинов в медовом сиропе",
@@ -55,7 +56,7 @@
   "item.farmersdelightplus.rice_dough": "Рисовое тесто",
   "item.farmersdelightplus.rice_flatbread": "Рисовая лепёшка",
   "item.farmersdelightplus.rice_pilaf": "Плов",
-  "item.farmersdelightplus.rice_with_black_caviar": "Рис с чёрной икрой",
+  "item.farmersdelightplus.rice_with_frogspawn": "Рис с лягушачьей икрой",
   "item.farmersdelightplus.risotto": "Ризотто",
   "item.farmersdelightplus.shining_salad": "Сверкающий салат",
   "item.farmersdelightplus.sparkling_potato": "Искристый картофель",
@@ -67,5 +68,6 @@
 
   "message.farmersdelightplus.pancake.invalid_block": "Это нельзя приготовить здесь...",
 
+  "farmersdelightplus.jei.info.frogspawn": "Может быть аккуратно собрана из воды с помощью миски",
   "farmersdelightplus.jei.pancake_filling": "Нанесение на блинчики"
 }

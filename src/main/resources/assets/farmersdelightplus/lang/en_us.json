@@ -13,6 +13,7 @@
   "block.farmersdelightplus.berry_pancake": "Stack of Berry Pancakes",
   "block.farmersdelightplus.chocolate_pancake": "Stack of Chocolate Pancakes",
   "block.farmersdelightplus.empty_pancake": "Stack of Pancakes",
+  "block.farmersdelightplus.glow_berry_barrel": "Glow Berries Barrel",
   "block.farmersdelightplus.golden_carrot_crate": "Golden Carrot Crate",
   "block.farmersdelightplus.heart_of_the_minotaur_block": "Heart of the Minotaur",
   "block.farmersdelightplus.honey_pancake": "Stack of Honey Pancakes",
@@ -55,7 +56,7 @@
   "item.farmersdelightplus.rice_dough": "Rice Dough",
   "item.farmersdelightplus.rice_flatbread": "Rice Flatbread",
   "item.farmersdelightplus.rice_pilaf": "Rice Pilaf",
-  "item.farmersdelightplus.rice_with_black_caviar": "Rice with Black Caviar",
+  "item.farmersdelightplus.rice_with_frogspawn": "Rice with Frogspawn",
   "item.farmersdelightplus.risotto": "Risotto",
   "item.farmersdelightplus.shining_salad": "Shining Salad",
   "item.farmersdelightplus.sparkling_potato": "Sparkling Potato",
@@ -67,5 +68,6 @@
 
   "message.farmersdelightplus.pancake.invalid_block": "This can't be cooked here...",
 
+  "farmersdelightplus.jei.info.frogspawn": "Can be carefully obtained from the water using a bowl",
   "farmersdelightplus.jei.pancake_filling": "Pancake Filling"
 }

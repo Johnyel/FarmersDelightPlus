@@ -13,6 +13,7 @@
   "block.farmersdelightplus.berry_pancake": "Pila de panqueques en jarabe de bayas",
   "block.farmersdelightplus.chocolate_pancake": "Pila de panqueques de chocolate",
   "block.farmersdelightplus.empty_pancake": "Pila de panqueques",
+  "block.farmersdelightplus.glow_berry_barrel": "Barril de bayas brillantes",
   "block.farmersdelightplus.golden_carrot_crate": "Caja de zanahoria dorada",
   "block.farmersdelightplus.heart_of_the_minotaur_block": "Corazón del Minotauro",
   "block.farmersdelightplus.honey_pancake": "Pila de panqueques en jarabe de miel",
@@ -55,7 +56,7 @@
   "item.farmersdelightplus.rice_dough": "Masa de arroz",
   "item.farmersdelightplus.rice_flatbread": "Pan plano de arroz",
   "item.farmersdelightplus.rice_pilaf": "Plov",
-  "item.farmersdelightplus.rice_with_black_caviar": "Arroz con caviar negro",
+  "item.farmersdelightplus.rice_with_frogspawn": "Arroz con caviar de rana",
   "item.farmersdelightplus.risotto": "Risotto",
   "item.farmersdelightplus.shining_salad": "Ensalada brillante",
   "item.farmersdelightplus.sparkling_potato": "Patatas reluciente",
@@ -67,5 +68,6 @@
 
   "message.farmersdelightplus.pancake.invalid_block": "No se puede cocinar aquí...",
 
+  "farmersdelightplus.jei.info.frogspawn": "Se puede recoger cuidadosamente del agua con un Bol",
   "farmersdelightplus.jei.pancake_filling": "Untado en panqueque"
 }
