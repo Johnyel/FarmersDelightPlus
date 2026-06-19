@@ -25,7 +25,7 @@ public class HoneyedRiceWithDragonEggItem extends ConsumableItem {
 
 		boolean flag = entity.hasEffect(ModEffects.BLESSED.get());
 		int amplifier = flag ? entity.getEffect(ModEffects.BLESSED.get()).getAmplifier() + 1 : 0;
-		entity.addEffect(new MobEffectInstance(ModEffects.BLESSED.get(), Integer.MAX_VALUE, amplifier, false, false, true));
+		entity.addEffect(new MobEffectInstance(ModEffects.BLESSED.get(), -1, amplifier, false, false, true));
 
 		return super.finishUsingItem(itemstack, world, entity);
 	}

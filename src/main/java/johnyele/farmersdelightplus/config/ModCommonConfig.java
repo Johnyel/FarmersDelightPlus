@@ -32,10 +32,8 @@ public class ModCommonConfig {
 			.define("enablePancakeBowlPickingUp", true);
 
 		PANCAKES_IN_SKILLET_ONLY = BUILDER
-			.comment(
-				"Should pancakes only be cooked in a skillet?",
-				"If true, cooking pancakes on a campfire or stove will be denied."
-			)
+			.comment("Should pancakes only be cooked in a skillet?")
+			.comment("If true, cooking pancakes on a campfire or stove will be denied.")
 			.define("cookPancakesOnlyInSkillet", true);
 			
 		BUILDER.pop(); // common

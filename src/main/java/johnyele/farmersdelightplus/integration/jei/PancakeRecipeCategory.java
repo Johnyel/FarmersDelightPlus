@@ -19,7 +19,6 @@ import johnyele.farmersdelightplus.integration.jei.JEIPlugin;
 import johnyele.farmersdelightplus.registry.ModItems;
 
 public class PancakeRecipeCategory implements IRecipeCategory<PancakeRecipe> {
-	public static final ResourceLocation UID = FarmersdelightplusMod.asResource("pancake_filling");
 	public static final ResourceLocation TEXTURE = FarmersdelightplusMod.asResource("textures/gui/jei/pancake_filling.png");
 	
 	private final IDrawable background;
@@ -54,6 +53,6 @@ public class PancakeRecipeCategory implements IRecipeCategory<PancakeRecipe> {
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, PancakeRecipe recipe, IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.INPUT, 14, 3).addIngredients(recipe.getIngredients().get(0));
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 75, 21).addItemStack(recipe.getResultItem());
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 75, 21).addItemStack(recipe.getResult());
 	}
 }

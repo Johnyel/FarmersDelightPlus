@@ -3,8 +3,8 @@ package johnyele.farmersdelightplus.advancements;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.advancements.critereon.SerializationContext;
 import net.minecraft.advancements.critereon.DeserializationContext;
@@ -19,9 +19,9 @@ public class PancakeRecipeTrigger extends SimpleCriterionTrigger<PancakeRecipeTr
 		return ID;
 	}
 
-	public PancakeRecipeTrigger.TriggerInstance createInstance(JsonObject jsonobject, EntityPredicate.Composite entityPredicate, DeserializationContext conditionsParser) {
+	public PancakeRecipeTrigger.TriggerInstance createInstance(JsonObject jsonobject, ContextAwarePredicate contextawarepredicate, DeserializationContext conditionsParser) {
 		MinMaxBounds.Ints minmaxbounds$ints = MinMaxBounds.Ints.fromJson(jsonobject.get("pancakes"));
-		return new PancakeRecipeTrigger.TriggerInstance(entityPredicate, minmaxbounds$ints);
+		return new PancakeRecipeTrigger.TriggerInstance(contextawarepredicate, minmaxbounds$ints);
 	}
 
 	public void trigger(ServerPlayer player, int pancakes) {
@@ -33,8 +33,8 @@ public class PancakeRecipeTrigger extends SimpleCriterionTrigger<PancakeRecipeTr
 	public static class TriggerInstance extends AbstractCriterionTriggerInstance {
 		private final MinMaxBounds.Ints pancakes;
 
-		public TriggerInstance(EntityPredicate.Composite entityPredicate, MinMaxBounds.Ints pancakes) {
-			super(PancakeRecipeTrigger.ID, entityPredicate);
+		public TriggerInstance(ContextAwarePredicate contextawarepredicate, MinMaxBounds.Ints pancakes) {
+			super(PancakeRecipeTrigger.ID, contextawarepredicate);
 			this.pancakes = pancakes;
 		}
 

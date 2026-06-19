@@ -7,7 +7,6 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.Material;
 
 import johnyele.farmersdelightplus.block.HeartOfTheMinotaurBlock;
 import johnyele.farmersdelightplus.block.HoneyedRiceWithDragonEggBlock;
@@ -18,9 +17,9 @@ public class ModBlocks {
 	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmersdelightplusMod.MODID);
 	
 	// Crop Storage
-	public static final RegistryObject<Block> GOLDEN_CARROT_CRATE = REGISTRY.register("golden_carrot_crate", () -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final RegistryObject<Block> SWEET_BERRY_BARREL = REGISTRY.register("sweet_berry_barrel", () -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final RegistryObject<Block> GLOW_BERRY_BARREL = REGISTRY.register("glow_berry_barrel", () -> new Block(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel(s -> 14)));
+	public static final RegistryObject<Block> GOLDEN_CARROT_CRATE = REGISTRY.register("golden_carrot_crate", () -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> SWEET_BERRY_BARREL = REGISTRY.register("sweet_berry_barrel", () -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+	public static final RegistryObject<Block> GLOW_BERRY_BARREL = REGISTRY.register("glow_berry_barrel", () -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel(s -> 14)));
 	public static final RegistryObject<Block> SUGAR_BAG = REGISTRY.register("sugar_bag", () -> new Block(Block.Properties.copy(Blocks.WHITE_WOOL)));
 
 	// Pancakes

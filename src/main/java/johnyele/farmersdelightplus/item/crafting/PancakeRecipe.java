@@ -5,6 +5,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -95,12 +96,12 @@ public class PancakeRecipe implements Recipe<RecipeWrapper> {
 	}
 
 	@Override
-	public ItemStack assemble(RecipeWrapper inv) {
-		return this.getResultItem().copy();
+	public ItemStack assemble(RecipeWrapper inv, RegistryAccess access) {
+		return this.getResultItem(access).copy();
 	}
 
 	@Override
-	public ItemStack getResultItem() {
+	public ItemStack getResultItem(RegistryAccess access) {
 		return this.result;
 	}
 
@@ -117,6 +118,10 @@ public class PancakeRecipe implements Recipe<RecipeWrapper> {
 	@Override
 	public RecipeType<?> getType() {
 		return ModRecipeTypes.PANCAKE_FILLING.get();
+	}
+	
+	public ItemStack getResult() {
+		return this.result;
 	}
 
 	public String getPropertiyName() {
@@ -156,7 +161,7 @@ public class PancakeRecipe implements Recipe<RecipeWrapper> {
 		recipe.transformBlock(level, pos, count[0]);
 		
 		Block.popResource(level, pos, new ItemStack(ModItems.EMPTY_PANCAKE.get(), count[1]));
-		player.awardStat(Stats.ITEM_CRAFTED.get(recipe.getResultItem().getItem()), count[0]);
+		player.awardStat(Stats.ITEM_CRAFTED.get(recipe.getResult().getItem()), count[0]);
 		consumeItemStack(player, itemstack);
 		
 		if (player instanceof ServerPlayer) {

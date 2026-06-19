@@ -27,7 +27,7 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -101,10 +101,10 @@ public class CommonEvents {
 
 	@SubscribeEvent
 	public static void onEntityUseTotem(LivingUseTotemEvent event) {
-		if (event.getSource().isBypassInvul()) return;
+		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
 		LivingEntity entity = event.getEntity();
 		
-		if (entity.level.isClientSide()) return;
+		if (entity.level().isClientSide()) return;
 		if (!entity.hasEffect(ModEffects.BLESSED.get())) return;
 
 		int amplifier = entity.getEffect(ModEffects.BLESSED.get()).getAmplifier();
@@ -116,10 +116,10 @@ public class CommonEvents {
 	
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event) {
-		if (event.getSource().isBypassInvul()) return;
+		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return;
 		LivingEntity entity = event.getEntity();
 		BlockPos pos = entity.blockPosition();
-		Level level = entity.level;
+		Level level = entity.level();
 		if (level.isClientSide()) return;
 		
 		if (!entity.hasEffect(ModEffects.BLESSED.get())) return;
@@ -155,7 +155,7 @@ public class CommonEvents {
 		
 		if (entity.hasEffect(ModEffects.SPIKES.get())) {
 			float damage = 1.0F + entity.getEffect(ModEffects.SPIKES.get()).getAmplifier();
-			attacker.hurt(DamageSource.CACTUS, damage);
+			attacker.hurt(entity.damageSources().cactus(), damage);
 		}
 	}
 
@@ -177,15 +177,17 @@ public class CommonEvents {
 			
 			IModFile modFile = modFileInfo.getFile();
 			
-			event.addRepositorySource((consumer, constructor) -> {
-				Pack pack = Pack.create(
+			event.addRepositorySource(consumer -> {
+				Pack pack = Pack.readMetaAndCreate(
 						FarmersdelightplusMod.asResource("pancakes_plus").toString(),
+						Component.literal("Autumnity Pancakes Plus"),
 						false,
-						() -> new PathPackResources(
-								"Autumnity Pancakes Plus",
+						id -> new PathPackResources(
+								id,
+								false,
 								modFile.findResource("resourcepacks/pancakes_plus")
 						),
-						constructor,
+						PackType.CLIENT_RESOURCES,
 						Pack.Position.TOP,
 						PackSource.DEFAULT
 				);

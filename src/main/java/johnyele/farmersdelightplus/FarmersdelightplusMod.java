@@ -17,8 +17,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -26,12 +24,11 @@ import johnyele.farmersdelightplus.registry.ModRecipeTypes;
 import johnyele.farmersdelightplus.registry.ModRecipeSerializers;
 import johnyele.farmersdelightplus.registry.ModItems;
 import johnyele.farmersdelightplus.registry.ModEffects;
+import johnyele.farmersdelightplus.registry.ModCreativeTabs;
 import johnyele.farmersdelightplus.registry.ModBlocks;
 import johnyele.farmersdelightplus.event.CommonSetupEvent;
 import johnyele.farmersdelightplus.config.ModCommonConfig;
 import johnyele.farmersdelightplus.config.ModClientConfig;
-
-import javax.annotation.Nonnull;
 
 import java.util.function.Supplier;
 import java.util.function.Function;
@@ -64,6 +61,7 @@ public class FarmersdelightplusMod {
 		ModItems.REGISTRY.register(bus);
 		ModBlocks.REGISTRY.register(bus);
 		ModEffects.REGISTRY.register(bus);
+		ModCreativeTabs.REGISTRY.register(bus);
 		//
 		// Recipes
 		ModRecipeSerializers.REGISTRY.register(bus);
@@ -73,13 +71,6 @@ public class FarmersdelightplusMod {
 	}
 
 	// Start of user code block mod methods
-	public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(MODID) {
-		@Nonnull
-		@Override
-		public ItemStack makeIcon() {
-			return new ItemStack(ModItems.HONEYED_RICE_WITH_DRAGON_EGG.get());
-		}
-	};
 	public static final String FDID = "farmersdelight";
 
 	public static ResourceLocation asResource(String path) {
@@ -96,7 +87,7 @@ public class FarmersdelightplusMod {
 
 	// End of user code block mod methods
 	private static final String PROTOCOL_VERSION = "1";
-	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, clientVersion -> true);
+	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	private static int messageID = 0;
 
 	public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {
