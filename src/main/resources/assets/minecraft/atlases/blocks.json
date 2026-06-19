@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "farmersdelightplus:entity/fish/salmon_honey_cooked"
+    }
+  ]
+}
