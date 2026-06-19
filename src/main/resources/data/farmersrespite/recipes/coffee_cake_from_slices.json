@@ -1,10 +1,4 @@
 {
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "farmersrespite"
-    }
-  ],
   "type": "minecraft:crafting_shapeless",
   "group": "coffee_cake",
   "ingredients": [
