@@ -12,6 +12,10 @@ Everything is designed in a clean **vanilla style** and balanced to fit naturall
 
 Farmer's Delight: Plus is compatible with mods like **Farmer’s Respite**, **Autumnity** and **Create**. These are not required, but they can expand the overall experience.
 
+### Required Mod
+
+Please also check the [original mod](https://www.nexusmods.com/subnautica/mods/1108), that Farmer's Delight: Plus is built for and inspired by. To use this addon, you must download the original mod.
+
 ### Contributing
 
 Thank you for visiting the project page. If you'd like to contribute, report a bug, or suggest improvements, feel free to open an issue or submit a pull request.
