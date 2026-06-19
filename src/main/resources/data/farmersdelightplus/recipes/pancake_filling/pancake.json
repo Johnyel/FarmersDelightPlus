@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
+  "type": "farmersdelightplus:pancake_filling",
+  "sound": "minecraft:item.bottle.empty",
+  "ingredient": {
+    "item": "autumnity:syrup_bottle"
+   },
+  "result": {
+    "item": "autumnity:pancake",
+    "block_property": "pancakes",
+    "multiplier": 2.0
+  }
+}

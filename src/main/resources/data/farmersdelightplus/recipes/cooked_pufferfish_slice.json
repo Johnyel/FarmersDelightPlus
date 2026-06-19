@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.35,
+  "cookingtime": 500,
+  "ingredient": {
+    "item": "farmersdelightplus:pufferfish_slice"
+  },
+  "result": "farmersdelightplus:cooked_pufferfish_slice"
+}

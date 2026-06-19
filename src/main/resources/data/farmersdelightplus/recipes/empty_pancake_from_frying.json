@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 1000,
+  "ingredient": {
+    "item": "farmersdelightplus:pancake_dough"
+  },
+  "result": "farmersdelightplus:empty_pancake"
+}

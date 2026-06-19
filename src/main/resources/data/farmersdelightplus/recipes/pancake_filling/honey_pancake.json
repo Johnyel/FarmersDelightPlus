@@ -1,0 +1,10 @@
+{
+  "type": "farmersdelightplus:pancake_filling",
+  "sound": "minecraft:block.honey_block.place",
+  "ingredient": {
+    "item": "minecraft:honey_bottle"
+  },
+  "result": {
+    "item": "farmersdelightplus:honey_pancake"
+  }
+}

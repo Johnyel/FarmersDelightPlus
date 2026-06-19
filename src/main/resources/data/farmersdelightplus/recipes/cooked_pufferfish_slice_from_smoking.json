@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "experience": 0.35,
+  "cookingtime": 300,
+  "ingredient": {
+    "item": "farmersdelightplus:pufferfish_slice"
+  },
+  "result": "farmersdelightplus:cooked_pufferfish_slice"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "farmersdelightplus:pancake_filling",
+  "sound": "minecraft:item.bottle.empty",
+  "ingredient": {
+    "item": "farmersdelight:hot_cocoa"
+  },
+  "result": {
+    "item": "farmersdelightplus:chocolate_pancake"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "autumnity"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmersdelightplus:empty_pancake"
+    },
+    {
+      "item": "autumnity:syrup_bottle"
+    }
+  ],
+  "result": {
+    "item": "autumnity:pancake"
+  }
+}

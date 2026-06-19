@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "sugar",
+  "ingredients": [
+    {
+      "item": "farmersdelightplus:sugar_bag"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "minecraft:sugar"
+  }
+}

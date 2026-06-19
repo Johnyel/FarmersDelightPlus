@@ -1,0 +1,23 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "farmersdelightplus:empty_pancake"
+    },
+    {
+      "fluidTag": "forge:chocolate",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelightplus:chocolate_pancake"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:pumpkin"
+    }
+  ],
+  "result": [
+    {
+      "item": "minecraft:carved_pumpkin"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:pumpkin_seeds"
+    }
+  ],
+  "tool": {
+    "tag": "forge:shears"
+  }
+}

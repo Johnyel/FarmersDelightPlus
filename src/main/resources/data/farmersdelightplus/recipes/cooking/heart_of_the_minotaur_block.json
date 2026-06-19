@@ -1,0 +1,32 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "farmersdelight:tomato_sauce"
+  },
+  "cookingtime": 300,
+  "experience": 1.0,
+  "ingredients": [
+  	{
+      "item": "minecraft:beef"
+    },
+    {
+      "item": "farmersdelight:mutton_chops"
+    },
+    {
+      "item": "farmersdelight:mutton_chops"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:beetroot"
+    },
+    {
+      "tag": "forge:salad_ingredients"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "farmersdelightplus:heart_of_the_minotaur_block"
+  }
+}
