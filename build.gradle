@@ -32,8 +32,8 @@ archivesBaseName = 'modid'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    //mappings channel: 'official', version: '1.20.1'
-    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
+    //mappings channel: 'official', version: '1.19.2'
+    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -75,14 +75,14 @@ minecraft {
 repositories {
     maven {
         // JEI
-		name = "BlameJared"
-		url = "https://maven.blamejared.com"
-	}
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
     maven { url "https://maven.ryanliptak.com/" }
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.20.1-47.1.0'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.4.2'
     
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     testAnnotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
